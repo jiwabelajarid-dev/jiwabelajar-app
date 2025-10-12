@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+/* html {
   scroll-behavior: smooth;
 }
 
@@ -26,5 +26,6 @@ section {
 .prose ul,
 .prose ol {
   list-style: revert;
-  margin-left: 1.25rem; /* Sesuaikan indentasi jika perlu */
-}
+  margin-left: 1.25rem;
+} 
+*/

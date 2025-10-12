@@ -6,7 +6,7 @@ const Hero = () => {
 
     return (
         <section id="home-section" className='bg-slateGray'>
-            <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 pt-20">
+            <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4 py-20">
                 <div className='grid grid-cols-1 lg:grid-cols-12 space-x-1 items-center'>
                     <div className='col-span-6 flex flex-col gap-8 '>
                         <h1 className='text-midnight_text text-4xl sm:text-5xl font-semibold pt-5 lg:pt-0'>Tentukan bakatmu dan Tingkatkan bersama kami</h1>

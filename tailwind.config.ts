@@ -33,6 +33,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  // ✨ DIUBAH: Tambahkan plugin typography di sini
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
 export default config;

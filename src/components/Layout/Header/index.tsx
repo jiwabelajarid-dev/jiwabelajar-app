@@ -83,9 +83,10 @@ const Header: React.FC = () => {
   }, [isSignInOpen, isSignUpOpen, navbarOpen]);
 
   return (
+    const nonFixedPaths = ["/KeluhKesah", "/profile", "/home"];
     <header
       className={`${
-        pathUrl === "/KeluhKesah" || pathUrl === "/profile"
+        nonFixedPaths.includes(pathUrl)
           ? "relative"
           : "fixed top-0 z-40"
       } w-full transition-all duration-300 bg-white ${

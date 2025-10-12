@@ -28,7 +28,7 @@ const Hero = () => {
 
                     </div>
                     <div className='col-span-6 flex justify-center'>
-                        <Image src={`${getImagePrefix()}/images/logo/Logoawal.svg`} alt="nothing" width={500} height={305} />
+                        <Image src={`${getImagePrefix()}images/logo/Logoawal.svg`} alt="nothing" width={500} height={305} />
                     </div>
                 </div>
 

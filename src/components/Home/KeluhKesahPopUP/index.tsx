@@ -9,12 +9,14 @@ interface KeluhKesahPopupProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (title: string, content: string) => void;
+  storyToEdit?: any;
 }
 
 const KeluhKesahPopup: React.FC<KeluhKesahPopupProps> = ({
   isOpen,
   onClose,
   onSave,
+  storyToEdit,
 }) => {
   // State untuk alur 2 langkah
   const [step, setStep] = useState<"terms" | "editor">("terms");
@@ -44,12 +46,20 @@ const KeluhKesahPopup: React.FC<KeluhKesahPopupProps> = ({
   // Reset semua state saat popup dibuka
   useEffect(() => {
     if (isOpen) {
-      setTitle("");
-      setContent("");
-      setAgreements({ term1: false, term2: false, term3: false, term4: false, term5: false });
-      setStep("terms"); // Selalu mulai dari langkah "terms"
+      if (storyToEdit) {
+        setTitle(storyToEdit.title);
+        setContent(storyToEdit.content);
+      } else {
+        // Jika tidak, kosongkan form (untuk cerita baru)
+        setTitle("");
+        setContent("");
+        setTitle("");
+        setContent("");
+        setAgreements({ term1: false, term2: false, term3: false, term4: false, term5: false });
+        setStep("terms");
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, storyToEdit]);
 
   if (!isOpen) return null;
 

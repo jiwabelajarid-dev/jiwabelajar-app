@@ -14,12 +14,12 @@ const footer = () => {
             <div className='flex items-center gap-4'>
               <Link href="#" className='hover:text-primary text-black text-3xl'>
                 <Icon
-                  icon="tabler:brand-facebook"
+                  icon="ic:baseline-tiktok"
                 />
               </Link>
-              <Link href="#" className='hover:text-primary text-black text-3xl'>
+              <Link href="https://x.com/Berjiwabelajar?t=9mSBIGcdAUDWQGz4h_fnjA&s=08 " className='hover:text-primary text-black text-3xl'>
                 <Icon
-                  icon="tabler:brand-twitter"
+                  icon="ri:twitter-x-fill"
                 />
               </Link>
               <Link href="https://www.instagram.com/jiwabelajar.id/" className='hover:text-primary text-black text-3xl'>
@@ -88,7 +88,7 @@ const footer = () => {
             </div>
             <div className="flex gap-2 mt-10">
               <Icon
-                icon="tabler:folder"
+                icon="mdi:email-outline"
                 className="text-primary text-3xl inline-block me-2"
               />
               <h5 className="text-lg text-black/60">jiwabelajar.id@gmail.com</h5>

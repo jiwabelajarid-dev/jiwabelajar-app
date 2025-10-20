@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation"; // ✨ DITAMBAHKAN
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { headerData } from "../Header/Navigation/menuData";
 import Logo from "./Logo";
@@ -10,11 +10,11 @@ import SignUp from "@/components/Auth/SignUp";
 import { useTheme } from "next-themes";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useAuth } from "@/context/AuthContext";
-import { createClient } from "@/utils/supabase/client"; // ✨ DITAMBAHKAN
+import { createClient } from "@/utils/supabase/client";
 
 const Header: React.FC = () => {
   const pathUrl = usePathname();
-  const router = useRouter(); // ✨ DITAMBAHKAN
+  const router = useRouter();
   const { theme, setTheme } = useTheme();
 
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
   const [isSignInOpen, setIsSignInOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
 
-  const { user } = useAuth(); // ✅ DIUBAH: Hapus 'logout' dari sini
+  const { user } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const signInRef = useRef<HTMLDivElement>(null);
@@ -85,7 +85,7 @@ const Header: React.FC = () => {
   return (
     <header
       className={`${
-        pathUrl === "/KeluhKesah" || pathUrl === "/profile" || pathUrl === "/home"
+        pathUrl === "/KeluhKesah" || pathUrl === "/profile"
           ? "relative"
           : "fixed top-0 z-40"
       } w-full transition-all duration-300 bg-white ${
@@ -94,7 +94,10 @@ const Header: React.FC = () => {
     >
       <div className="lg:py-0 py-2">
         <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md flex items-center justify-between px-4">
+          {/* 🔹 Logo */}
           <Logo />
+
+          {/* 🔹 Menu Desktop */}
           <nav className="hidden lg:flex flex-grow items-center gap-8 justify-center">
             {headerData.map((item, index) => (
               <HeaderLink key={index} item={item} />
@@ -105,6 +108,7 @@ const Header: React.FC = () => {
           <div className="flex items-center gap-4">
             {!user ? (
               <>
+                {/* Tombol Sign In */}
                 <Link
                   href="#"
                   className="hidden lg:block bg-primary text-white hover:bg-primary/15 hover:text-primary px-16 py-5 rounded-full text-lg font-medium"
@@ -124,7 +128,7 @@ const Header: React.FC = () => {
                         aria-label="Close Sign In Modal"
                       >
                         <Icon
-                          icon="tabler:x" 
+                          icon="tabler:x"
                           className="text-black hover:text-primary text-2xl"
                         />
                       </button>
@@ -133,11 +137,13 @@ const Header: React.FC = () => {
                           setIsSignInOpen(false);
                           setIsSignUpOpen(true);
                         }}
-                        onClose={() => setIsSignInOpen(false)} 
+                        onClose={() => setIsSignInOpen(false)}
                       />
                     </div>
                   </div>
                 )}
+
+                {/* Tombol Sign Up */}
                 <Link
                   href="#"
                   className="hidden lg:block bg-primary/15 hover:bg-primary text-primary hover:text-white px-16 py-5 rounded-full text-lg font-medium"
@@ -157,8 +163,8 @@ const Header: React.FC = () => {
                         aria-label="Close Sign Up Modal"
                       >
                         <Icon
-                           icon="tabler:x" 
-                           className="text-black hover:text-primary text-2xl"
+                          icon="tabler:x"
+                          className="text-black hover:text-primary text-2xl"
                         />
                       </button>
                       <SignUp
@@ -173,6 +179,7 @@ const Header: React.FC = () => {
               </>
             ) : (
               <>
+                {/* 🔹 Dropdown user */}
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -189,14 +196,12 @@ const Header: React.FC = () => {
                         {user.name?.[0]?.toUpperCase() || "J"}
                       </div>
                     )}
-
                     <div className="text-left hidden lg:block">
                       <p className="font-medium">{user.name}</p>
                       <p className="text-sm text-gray-500">{user.email}</p>
                     </div>
                   </button>
 
-                  {/* Dropdown */}
                   {isDropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50">
                       <Link
@@ -208,7 +213,7 @@ const Header: React.FC = () => {
                       </Link>
                       <button
                         onClick={() => {
-                          handleLogout(); 
+                          handleLogout();
                           setIsDropdownOpen(false);
                         }}
                         className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50"
@@ -221,7 +226,7 @@ const Header: React.FC = () => {
               </>
             )}
 
-            {/* Mobile Menu Button */}
+            {/* 🔹 Tombol Mobile Menu (hamburger) */}
             <button
               onClick={() => setNavbarOpen(!navbarOpen)}
               className="block lg:hidden p-2 rounded-lg"
@@ -234,6 +239,69 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* 🔹 MENU MOBILE */}
+      {navbarOpen && (
+        <div
+          ref={mobileMenuRef}
+          className="absolute top-full left-0 w-full bg-white shadow-md lg:hidden z-50"
+        >
+          <nav className="flex flex-col items-start space-y-3 p-4">
+            {headerData.map((item, index) => (
+              <Link
+                key={index}
+                href={item.href}
+                className="w-full text-gray-700 hover:text-primary py-2 border-b border-gray-100"
+                onClick={() => setNavbarOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            {!user ? (
+              <>
+                <button
+                  onClick={() => {
+                    setIsSignInOpen(true);
+                    setNavbarOpen(false);
+                  }}
+                  className="w-full bg-primary text-white py-2 rounded-lg font-medium"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => {
+                    setIsSignUpOpen(true);
+                    setNavbarOpen(false);
+                  }}
+                  className="w-full bg-primary/15 text-primary py-2 rounded-lg font-medium"
+                >
+                  Sign Up
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/profile"
+                  className="w-full text-gray-700 hover:text-primary py-2"
+                  onClick={() => setNavbarOpen(false)}
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setNavbarOpen(false);
+                  }}
+                  className="w-full text-red-600 hover:bg-red-50 py-2 text-left"
+                >
+                  Logout
+                </button>
+              </>
+            )}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };

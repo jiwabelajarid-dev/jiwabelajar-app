@@ -1,19 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { HeaderItem } from "../../../../types/menu";
+import { HeaderItem } from "../../../../types/menu"; 
 import { usePathname } from "next/navigation";
 
 const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
   const [submenuOpen, setSubmenuOpen] = useState(false);
-  const path = usePathname(); // Get the current path from Next.js router
-  const [isActive, setIsActive] = useState(false);
+  const pathUrl = usePathname(); 
 
-  // Check if the current path matches the link or any submenu link
-  useEffect(() => {
-    const isLinkActive = (path === item.href || (item.submenu && item.submenu.some(subItem => path === subItem.href))) ?? false;
-    setIsActive(isLinkActive); // Ensure isLinkActive is always a boolean
-  }, [path, item.href, item.submenu]);
+  const isActive =
+    pathUrl === item.href ||
+    (item.submenu && item.submenu.some(subItem => pathUrl === subItem.href));
 
   const handleMouseEnter = () => {
     if (item.submenu) {
@@ -32,11 +29,13 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
       onMouseLeave={handleMouseLeave}
     >
       <Link
-        href={`/${item.href}`}
-        className={`text-lg flex hover:text-black capitalized relative ${isActive
-            ? "text-black after:absolute after:w-8 after:h-1 after:bg-primary after:rounded-full after:-bottom-1"
-            : "text-grey"
-          }`}
+      
+        href={item.href} 
+        className={`text-lg flex items-center hover:text-black capitalize relative ${
+          isActive
+            ? "text-black font-semibold after:absolute after:w-full after:h-0.5 after:bg-primary after:rounded-full after:-bottom-1" 
+            : "text-grey border-b-2 border-transparent" 
+        }`}
       >
         {item.label}
         {item.submenu && (
@@ -61,19 +60,19 @@ const HeaderLink: React.FC<{ item: HeaderItem }> = ({ item }) => {
       {submenuOpen && (
         <div
           className={`absolute py-2 left-0 mt-0.5 w-60 bg-white dark:bg-darklight dark:text-white shadow-lg rounded-lg `}
-          data-aos="fade-up"
-          data-aos-duration="500"
         >
           {item.submenu?.map((subItem, index) => {
-            const isSubItemActive = path === subItem.href; // Check if the submenu item is active
+           
+            const isSubItemActive = pathUrl === subItem.href;
             return (
               <Link
                 key={index}
                 href={subItem.href}
-                className={`block px-4 py-2 ${isSubItemActive
+                className={`block px-4 py-2 ${
+                  isSubItemActive
                     ? "bg-primary text-white"
                     : "text-black dark:text-white hover:bg-primary"
-                  }`}
+                }`}
               >
                 {subItem.label}
               </Link>

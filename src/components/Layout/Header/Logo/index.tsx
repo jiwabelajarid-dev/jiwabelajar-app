@@ -6,6 +6,7 @@ const Logo: React.FC = () => {
   return (
     <Link 
       href="/" 
+  
       className="relative block w-[200px] h-[50px] md:w-[300px]" 
     >
       <Image

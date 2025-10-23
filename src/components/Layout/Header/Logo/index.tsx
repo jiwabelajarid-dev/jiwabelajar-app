@@ -4,13 +4,15 @@ import Link from "next/link";
 
 const Logo: React.FC = () => {
   return (
-    <Link href="/">
+    <Link 
+      href="/" 
+      className="relative block w-[200px] h-[50px] md:w-[300px]" 
+    >
       <Image
-        src= {`${getImagePrefix()}images/logo/logoJBid.svg`}
+        src={`${getImagePrefix()}images/logo/logoJBid.svg`}
         alt="logo"
-        width={160}
-        height={50}
-        style={{ width: "300px", height: "auto" }}
+        fill 
+        style={{ objectFit: "contain" }} 
         quality={100}
       />
     </Link>

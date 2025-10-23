@@ -15,6 +15,14 @@ type UserProfile = {
 type AuthContextType = {
   user: UserProfile | null;
   updateProfile: (newData: { name?: string }, file?: File) => Promise<void>;
+  isSignInModalOpen: boolean;
+  openSignInModal: () => void;
+  closeSignInModal: () => void;
+  isSignUpModalOpen: boolean;
+  openSignUpModal: () => void;
+  closeSignUpModal: () => void;
+  switchToSignUp: () => void;
+  switchToSignIn: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -22,6 +30,9 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const supabase = createClient();
   const [user, setUser] = useState<UserProfile | null>(null);
+
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -89,11 +100,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
-  return (
-    <AuthContext.Provider value={{ user, updateProfile }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const openSignInModal = () => setIsSignInModalOpen(true);
+  const closeSignInModal = () => setIsSignInModalOpen(false);
+  const openSignUpModal = () => setIsSignUpModalOpen(true);
+  const closeSignUpModal = () => setIsSignUpModalOpen(false);
+  const switchToSignUp = () => {
+    closeSignInModal();
+    openSignUpModal();
+  };
+  const switchToSignIn = () => {
+    closeSignUpModal();
+    openSignInModal();
+  };
+
+  const value = {
+    user,
+    updateProfile,
+    isSignInModalOpen,
+    openSignInModal,
+    closeSignInModal,
+    isSignUpModalOpen,
+    openSignUpModal,
+    closeSignUpModal,
+    switchToSignUp,
+    switchToSignIn,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {

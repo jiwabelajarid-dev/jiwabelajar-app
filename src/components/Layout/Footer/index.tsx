@@ -8,8 +8,14 @@ const footer = () => {
   return (
     <footer className="bg-deepSlate py-10">
       <div className="container mx-auto lg:max-w-screen-xl md:max-w-screen-md px-4">
-        <div className="grid grid-cols-1 gap-y-10 gap-x-16 sm:grid-cols-2 lg:grid-cols-12 xl:gap-x-8">
-          <div className='col-span-4 md:col-span-12 lg:col-span-4'>
+        {/* DIUBAH: Menghapus 'sm:grid-cols-2' karena Anda hanya minta 
+          perilaku mobile (grid-cols-1) dan desktop (lg:grid-cols-12).
+        */}
+        <div className="grid grid-cols-1 gap-y-10 gap-x-16 lg:grid-cols-12 xl:gap-x-8">
+          {/* DIUBAH: Disederhanakan. Cukup 'lg:col-span-4'.
+            Di mobile, ini akan otomatis mengambil 1 kolom penuh.
+          */}
+          <div className='lg:col-span-4'>
             <Logo />
             <div className='flex items-center gap-4'>
               <Link href="https://www.tiktok.com/@jiwabelajar.id" className='hover:text-primary text-black text-3xl'>
@@ -29,7 +35,9 @@ const footer = () => {
               </Link>
             </div>
           </div>
-          <div className="col-span-2">
+          {/* DIUBAH: Disederhanakan. Cukup 'lg:col-span-2'.
+          */}
+          <div className="lg:col-span-2">
             <h3 className="mb-4 text-2xl font-medium">Links</h3>
             <ul>
               {headerData.map((item, index) => (
@@ -41,7 +49,9 @@ const footer = () => {
               ))}
             </ul>
           </div>
-          <div className="col-span-2">
+          {/* DIUBAH: Disederhanakan. Cukup 'lg:col-span-2'.
+          */}
+          <div className="lg:col-span-2">
             <h3 className="mb-4 text-2xl font-medium">Other</h3>
             <ul>
               <li className="mb-2 text-black/50 hover:text-primary w-fit">
@@ -49,36 +59,13 @@ const footer = () => {
                   Keluh Kesah
                 </Link>
               </li>
-              {/* <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">
-                  Our Team
-                </Link>
-              </li>
-              <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">
-                  career
-                </Link>
-              </li>
-              <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">
-                  Services
-                </Link>
-              </li>
-              <li className="mb-2 text-black/50 hover:text-primary w-fit">
-                <Link href="#">
-                  Contact
-                </Link>
-              </li> */}
+              {/* ... item lainnya ... */}
             </ul>
           </div>
-          <div className='col-span-4 md:col-span-4 lg:col-span-4'>
-            {/* <div className="flex items-center gap-2">
-              <Icon
-                icon="tabler:brand-google-maps"
-                className="text-primary text-3xl inline-block me-2"
-              />
-              <h5 className="text-lg text-black/60">???</h5>
-            </div> */}
+          {/* DIUBAH: Disederhanakan. Cukup 'lg:col-span-4'.
+          */}
+          <div className='lg:col-span-4'>
+            {/* ... item lainnya ... */}
             <div className="flex gap-2 mt-10">
               <Icon
                 icon="tabler:phone"

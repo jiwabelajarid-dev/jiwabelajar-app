@@ -12,7 +12,7 @@ const footer = () => {
           <div className='col-span-4 md:col-span-12 lg:col-span-4'>
             <Logo />
             <div className='flex items-center gap-4'>
-              <Link href="#" className='hover:text-primary text-black text-3xl'>
+              <Link href="https://www.tiktok.com/@jiwabelajar.id" className='hover:text-primary text-black text-3xl'>
                 <Icon
                   icon="ic:baseline-tiktok"
                 />
